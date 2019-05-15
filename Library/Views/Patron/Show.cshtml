@@ -1,0 +1,49 @@
+<h2>Patron Details:</h2>
+<p>Patron: @Model["patron"].Name</p>
+<p>Checkout Date: @Model["patron"].CheckoutDate</p>
+
+
+<p>Books @Model["patron"].Name has checked out:</p>
+@if(Model["patronBooks"].Count != 0)
+{
+  <ul>
+  @foreach(var book in Model["patronBooks"])
+  {
+    <li>@book.Title
+    <form action='/patron/@Model["patron"].Id/completed' method='post'>
+    <input type="hidden" name="patronId" value="@Model["patron"].Id">
+    <input type="hidden" name="bookId" value="@book.Id">
+    <button type='submit'>Mark Book as Read</button>
+    </form>
+    </li>
+  }
+  </ul>
+}
+
+
+<p>Books @Model["patron"].Name has read:</p>
+
+@if(Model["readBooks"].Count != 0)
+{
+  <ul>
+  @foreach(var book in Model["readBooks"])
+  {
+    <li>@book.Title
+    </li>
+  }
+  </ul>
+}
+
+
+
+
+<form action="/patron/@Model["patron"].Id/addBook" method="post">
+  <label for="bookId">Add Book: </label>
+  <select name="bookId">
+    @foreach(var book in Model["books"])
+    {
+      <option value= "@book.Id" name="bookId">@book.Title</option>
+    }
+  </select>
+  <button type="submit" name="button">Add Book</button>
+</form>

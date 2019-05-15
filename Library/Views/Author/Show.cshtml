@@ -1,0 +1,23 @@
+<h2>Author Details:</h2>
+<p>Name: @Model["author"].Name</p>
+
+@if(Model["authorBooks"].Count != 0)
+{
+  <ul>
+    @foreach(var book in Model["authorBooks"])
+    {
+      <li>@book.Title</li>
+    }
+  </ul>
+}
+
+<form action="/author/@Model["author"].Id/addBook" method="post">
+  <label for="bookId">Add Book: </label>
+  <select name="bookId">
+    @foreach(var book in Model["books"])
+    {
+      <option value= "@book.Id" name="bookId">@book.Title</option>
+    }
+  </select>
+  <button type="submit" name="button">Add Book</button>
+</form>
