@@ -15,6 +15,14 @@
     <input type="hidden" name="bookId" value="@book.Id">
     <button type='submit'>Mark Book as Read</button>
     </form>
+
+    <form action='/patron/@Model["patron"].Id/remove-book' method='post'>
+    <input type="hidden" name="patronId" value="@Model["patron"].Id">
+    <input type="hidden" name="bookId" value="@book.Id">
+    <button type='submit'>Return Book</button>
+    </form>
+
+
     </li>
   }
   </ul>

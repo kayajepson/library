@@ -47,6 +47,14 @@ namespace Library.Controllers
       return View(dictionary);
     }
 
+    [HttpPost("/patron/{patronId}/remove-book")]
+    public ActionResult RemoveBook(int bookId, int patronId)
+    {
+      Book book = Book.Find(bookId);
+      book.Remove();
+      return RedirectToAction("Show", new{patronId = patronId});
+    }
+
     [HttpPost("/patron/{patronId}/addBook")]
     public IActionResult AssignBook(int patronId, string bookId)
     {

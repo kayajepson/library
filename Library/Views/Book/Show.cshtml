@@ -1,27 +1,17 @@
 <h2>Book Details:</h2>
-<p>Name: @Model["book"].Name</p>
+<p>Name: @Model["selectedBook"].Title</p>
 
-@if(Model["patronBooks"].Count != 0)
+@if(Model["bookAuthors"].Count != 0)
 {
   <ul>
-  @foreach(var patron in Model["patronBooks"])
+  @foreach(var Author in Model["bookAuthors"])
   {
-    <li>@patron.Name</li>
+    <li>@Author.Name</li>
   }
   </ul>
 }
 
-<form action="/major/@Model["major"].Id/addBook" method="post">
-  <label for="bookId">Add Book: </label>
-  <select name="bookId">
-    @foreach(var book in Model["books"])
-    {
-      <option value= "@book.Id" name="bookId">@book.Title</option>
-      <form action='/books/@Model["selectedBook"].Id/completed' method='post'>
-      <input type="hidden" name="bookId" value="@Model["selectedBook"].Id">
-      <button type='submit'>Mark Book as Complete</button>
+      <form action='/books/@Model["selectedBook"].Id/delete-book' method='post'>
+      <input type="hidden" name="BookId" value="@Model["selectedBook"].Id">
+      <button type='submit'>Delete Book</button>
       </form>
-    }
-  </select>
-  <button type="submit" name="button">Add Book</button>
-</form>
