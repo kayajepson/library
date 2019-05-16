@@ -25,5 +25,16 @@ namespace Library.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet("/")]
+        public ActionResult Search(int id)
+        {
+          Dictionary<string, object> model = new Dictionary<string, object>();
+          Book selectedBook = Book.Find(id);
+          List<Author> bookAuthors = selectedBook.GetAuthors(id);
+          model.Add("selectedBook", selectedBook);
+          model.Add("bookAuthors", bookAuthors);
+          return View(model);
+        }
     }
 }

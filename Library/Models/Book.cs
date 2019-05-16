@@ -121,10 +121,6 @@ namespace Library.Models
       JOIN author_books ON (books.id = author_books.book_id)
       JOIN author ON (author_books.author_id = author.id)
       WHERE books.id = @BookId;";
-      // MySqlParameter BookIdParameter = new MySqlParameter();
-      // BookIdParameter.ParameterName = "@BookId";
-      // BookIdParameter.Value = _id;
-      // cmd.Parameters.Add(BookIdParameter);
       cmd.Parameters.AddWithValue("@BookId", id);
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       List<Author> authors = new List<Author>{};
@@ -142,5 +138,8 @@ namespace Library.Models
       }
       return authors;
     }
+
+
+
   }
 }
